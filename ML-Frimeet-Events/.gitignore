@@ -1,0 +1,20 @@
+# Entornos virtuales
+venv/
+env/
+.venv/
+
+# Caché de Python
+__pycache__/
+*.py[cod]
+*$py.class
+
+# Variables de entorno secretas
+.env
+
+# Bases de datos locales generadas (DuckDB)
+warehouse.db
+warehouse.db.wal
+
+# Artefactos de Machine Learning y reportes generados
+models/*.joblib
+models/*.json

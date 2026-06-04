@@ -1,0 +1,11 @@
+psycopg2-binary
+Faker
+python-dotenv
+numpy
+pandas
+duckdb
+scikit-learn
+joblib
+fastapi
+uvicorn
+python-jose[cryptography]
