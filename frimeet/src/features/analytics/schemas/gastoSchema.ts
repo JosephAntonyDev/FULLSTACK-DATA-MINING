@@ -10,8 +10,8 @@ export const gastoSchema = z.object({
     .number()
     .min(0.5, "Mínimo 30 minutos")
     .max(24, "Máximo 24 horas"),
-  incluye_comida: z.boolean(),
-  incluye_bebida: z.boolean(),
+  incluye_comida: z.boolean().optional(),
+  incluye_bebida: z.boolean().optional(),
   ciudad: z.string().min(1, "Selecciona una ciudad"),
 });
 

@@ -70,6 +70,7 @@ export const usePredictGasto = () => {
       return {
         gasto_min: result.rango_bajo_mxn || 0,
         gasto_max: result.rango_alto_mxn || 0,
+        gasto_promedio_persona: result.gasto_por_persona_mxn || 0,
         desglose: {
           lugar: Math.round(total * 0.4),
           comida: data.incluye_comida ? Math.round(total * 0.3) : 0,

@@ -31,7 +31,7 @@ export const GastoResult = ({ data }: GastoResultProps) => {
     <div className="gasto-result">
       {/* Rango principal */}
       <div className="gasto-result__range">
-        <p className="gasto-result__range-label">Inversión estimada</p>
+        <p className="gasto-result__range-label">Inversión estimada (Total del Evento)</p>
         <div className="gasto-result__range-values">
           <span className="gasto-result__min">{formatMXN(data.gasto_min)}</span>
           <span className="gasto-result__separator">—</span>
@@ -41,7 +41,12 @@ export const GastoResult = ({ data }: GastoResultProps) => {
         <div className="gasto-result__bar-track">
           <div className="gasto-result__bar-fill" />
         </div>
-        <p className="gasto-result__currency">MXN (Pesos mexicanos)</p>
+        <p className="gasto-result__currency">
+          MXN (Pesos mexicanos)<br/>
+          <span style={{ fontSize: '0.85em', color: 'var(--color-text-light)', marginTop: '4px', display: 'inline-block' }}>
+            Gasto promedio por persona: <strong>{formatMXN(data.gasto_promedio_persona)}</strong>
+          </span>
+        </p>
       </div>
 
       {/* Gráfica de dona */}

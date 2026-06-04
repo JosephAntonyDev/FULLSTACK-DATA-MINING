@@ -55,6 +55,7 @@ export type GastoInput = {
 export type GastoResponse = {
   gasto_min: number;
   gasto_max: number;
+  gasto_promedio_persona: number;
   desglose: {
     lugar: number;
     comida: number;
