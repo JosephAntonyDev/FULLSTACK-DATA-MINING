@@ -1,0 +1,343 @@
+@import "tailwindcss";
+
+/* ─────────────────────────────────────────────
+   DESIGN TOKENS
+───────────────────────────────────────────── */
+:root {
+  --color-primary-pink: #FF2D87;
+  --color-primary-orange: #FF6B1A;
+  --color-accent-green: #B8F02D;
+  --color-white: #FFFFFF;
+  --color-background: #F5F5F5;
+  --color-border: #EAEAEA;
+  --color-gray: #B0B0B0;
+  --color-dark-gray: #6E6E6E;
+  --color-black: #2D2D2D;
+
+  --gradient-primary: linear-gradient(90deg, #FF2D87 0%, #FF6B1A 100%);
+  --gradient-bg: linear-gradient(135deg, #FF2D87 0%, #FF6B1A 55%, #FF8C00 100%);
+
+  --radius-sm: 8px;
+  --radius-md: 12px;
+  --radius-lg: 16px;
+  --radius-xl: 24px;
+  --radius-full: 9999px;
+
+  --shadow-card: 0 8px 24px rgba(0, 0, 0, 0.08);
+  --shadow-modal: 0 16px 48px rgba(0, 0, 0, 0.12);
+}
+
+@theme inline {
+  --color-brand-pink: var(--color-primary-pink);
+  --color-brand-orange: var(--color-primary-orange);
+  --color-brand-green: var(--color-accent-green);
+  --color-brand-white: var(--color-white);
+  --color-brand-background: var(--color-background);
+  --color-brand-border: var(--color-border);
+  --color-brand-gray: var(--color-gray);
+  --color-brand-dark-gray: var(--color-dark-gray);
+  --color-brand-black: var(--color-black);
+}
+
+/* ─────────────────────────────────────────────
+   BASE
+───────────────────────────────────────────── */
+*,
+*::before,
+*::after {
+  box-sizing: border-box;
+  margin: 0;
+  padding: 0;
+}
+
+body {
+  background-color: var(--color-background);
+  color: var(--color-black);
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+}
+
+/* ─────────────────────────────────────────────
+   LOGIN PAGE LAYOUT
+───────────────────────────────────────────── */
+.login-page {
+  position: relative;
+  min-height: 100vh;
+  width: 100%;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  overflow: hidden;
+  padding: 2rem 1rem;
+  background: var(--color-white);
+}
+
+/*
+  Fondo: 3 formas geométricas sobre base blanca.
+  
+  1) Rosa→Naranja: polígono grande con borde inferior diagonal
+     (más bajo a la izquierda, más alto a la derecha)
+  2) Verde: triángulo en la esquina inferior-derecha
+  3) Blanco: el fondo base de .login-page
+*/
+
+/* Forma principal rosa→naranja */
+.login-bg-orange {
+  position: absolute;
+  inset: 0;
+  background: linear-gradient(130deg, #FF2D87 0%, #FF5A1A 30%, #FF6B1A 50%, #FF7A20 100%);
+  clip-path: polygon(0 0, 100% 0, 100% 60%, 0 85%);
+  z-index: 0;
+}
+
+/* Fondo blanco — heredado del base */
+.login-bg-white {
+  display: none;
+}
+
+/* Triángulo verde inferior-derecha */
+.login-green-blob {
+  position: absolute;
+  inset: 0;
+  background: var(--color-accent-green);
+  clip-path: polygon(52% 72%, 100% 60%, 100% 92%);
+  z-index: 1;
+}
+
+/* Logo centrado en la parte superior */
+.login-logo-wrapper {
+  position: relative;
+  z-index: 10;
+  margin-bottom: 1.5rem;
+  display: flex;
+  justify-content: center;
+}
+
+.login-logo {
+  object-fit: contain;
+  filter: drop-shadow(0 2px 8px rgba(0,0,0,0.15));
+}
+
+/* Card del formulario */
+.login-card {
+  position: relative;
+  z-index: 10;
+  background: var(--color-white);
+  border-radius: var(--radius-xl);
+  box-shadow: var(--shadow-modal);
+  padding: 2.5rem 2rem;
+  width: 100%;
+  max-width: 440px;
+}
+
+/* ── Imágenes decorativas (solo desktop ≥1024px) ── */
+.login-img {
+  position: absolute;
+  z-index: 5;
+  display: none;
+}
+
+@media (min-width: 1024px) {
+  .login-img {
+    display: block;
+  }
+
+  /* 1.png — Izquierda, pegada a la pared izquierda, grande */
+  .login-img--left {
+    left: 0;
+    bottom: 0;
+    width: 480px;
+    height: 720px;
+  }
+
+  /* 3.png — Superior-derecha, pegada a la pared derecha, grande */
+  .login-img--top-right {
+    right: 0;
+    top: 0;
+    width: 380px;
+    height: 480px;
+  }
+
+  /* 2.png — Inferior-derecha, pegada abajo, un poco más grande */
+  .login-img--bottom-right {
+    right: 0;
+    bottom: 0;
+    width: 360px;
+    height: 520px;
+    z-index: 6;
+  }
+}
+
+/* ── Ultra-wide ── */
+@media (min-width: 1440px) {
+  .login-img--left {
+    width: 540px;
+    height: 800px;
+  }
+
+  .login-img--top-right {
+    width: 420px;
+    height: 540px;
+  }
+
+  .login-img--bottom-right {
+    width: 400px;
+    height: 580px;
+  }
+}
+
+/* ─────────────────────────────────────────────
+   LOGIN FORM STYLES
+───────────────────────────────────────────── */
+.login-form-wrapper {
+  display: flex;
+  flex-direction: column;
+  gap: 0;
+  width: 100%;
+}
+
+.login-form-header {
+  text-align: center;
+  margin-bottom: 2rem;
+}
+
+.login-form-title {
+  font-size: 1.875rem;
+  font-weight: 700;
+  color: var(--color-primary-orange);
+  margin-bottom: 0.5rem;
+  line-height: 1.2;
+}
+
+.login-form-subtitle {
+  font-size: 0.875rem;
+  color: var(--color-dark-gray);
+  line-height: 1.5;
+}
+
+.login-form-divider-accent {
+  width: 48px;
+  height: 3px;
+  background: var(--gradient-primary);
+  border-radius: var(--radius-full);
+  margin: 0.75rem auto 0;
+}
+
+.login-form-fields {
+  display: flex;
+  flex-direction: column;
+  gap: 1.25rem;
+}
+
+.login-password-group {
+  display: flex;
+  flex-direction: column;
+  gap: 0.375rem;
+}
+
+.login-forgot-link-wrapper {
+  display: flex;
+  justify-content: flex-end;
+}
+
+.login-forgot-link {
+  font-size: 0.8125rem;
+  font-weight: 600;
+  color: var(--color-primary-orange);
+  text-decoration: none;
+  transition: opacity 0.15s ease;
+}
+
+.login-forgot-link:hover {
+  opacity: 0.75;
+}
+
+.login-eye-btn {
+  background: none;
+  border: none;
+  cursor: pointer;
+  color: var(--color-gray);
+  padding: 0;
+  display: flex;
+  align-items: center;
+  transition: color 0.15s ease;
+}
+
+.login-eye-btn:hover {
+  color: var(--color-black);
+}
+
+.login-register-row {
+  margin-top: 1rem;
+  text-align: center;
+  font-size: 0.875rem;
+  color: var(--color-dark-gray);
+}
+
+.login-register-link {
+  font-weight: 700;
+  color: var(--color-primary-orange);
+  text-decoration: none;
+  transition: opacity 0.15s ease;
+}
+
+.login-register-link:hover {
+  opacity: 0.75;
+}
+
+/* Botón de Google */
+.login-google-btn {
+  margin-top: 0.75rem;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 0.625rem;
+  width: 100%;
+  height: 3rem;
+  border: 1.5px solid var(--color-border);
+  border-radius: var(--radius-full);
+  background: var(--color-white);
+  font-size: 0.9375rem;
+  font-weight: 500;
+  color: var(--color-black);
+  cursor: pointer;
+  transition: background-color 0.15s ease, border-color 0.15s ease;
+}
+
+.login-google-btn:hover {
+  background-color: var(--color-background);
+  border-color: var(--color-gray);
+}
+
+/* ─────────────────────────────────────────────
+   INPUT COMPONENT
+───────────────────────────────────────────── */
+.login-input {
+  display: block;
+  width: 100%;
+  height: 3rem;
+  background: transparent;
+  border: none;
+  border-bottom: 1.5px solid var(--color-border);
+  color: var(--color-black);
+  font-size: 0.9375rem;
+  outline: none;
+  transition: border-color 0.2s ease;
+}
+
+.login-input::placeholder {
+  color: var(--color-gray);
+}
+
+.login-input:focus {
+  border-bottom-color: var(--color-primary-pink);
+}
+
+.login-input--error {
+  border-bottom-color: #ef4444;
+}
+
+.login-input--error:focus {
+  border-bottom-color: #ef4444;
+}
