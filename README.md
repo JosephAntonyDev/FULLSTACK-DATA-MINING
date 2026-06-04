@@ -111,7 +111,7 @@ npm install
 **2. Empareja o conecta el Endpoint del Backend:**
 Crea un archivo de entorno llamado `.env.local` en la raíz de esta carpeta (frimeet) y configura la URL de tu backend. Deberá corresponder con el puerto donde está levantado el backend anterior:
 ```properties
-NEXT_PUBLIC_API_URL=http://localhost:8000
+NEXT_PUBLIC_API_URL=http://127.0.0.1:8000
 ```
 
 **3. Corre el servidor de desarrollo Front:**
